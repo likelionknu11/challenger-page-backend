@@ -8,6 +8,3 @@ develop : 개발을 위한 브랜치
 feature : 각각의 개발자가 기능을 개발하는 브랜치   
 release : develop에서 master로 Merge 전에 품질검사를 진행하는 브랜치    
 hotfix : 출시 버전에서 발생한 버그를 수정 하는 브랜치   
-   
-   
-규칙: GitFlowName-DevNAme-featureName
