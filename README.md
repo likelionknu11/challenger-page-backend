@@ -10,4 +10,7 @@ release : develop에서 master로 Merge 전에 품질검사를 진행하는 브�
 hotfix : 출시 버전에서 발생한 버그를 수정 하는 브랜치   
 
 # Team Info
-(추가 예정)
+문지혜   
+김성수   
+육예은   
+전윤환   
