@@ -10,4 +10,10 @@ release : develop에서 master로 Merge 전에 품질검사를 진행하는 브�
 hotfix : 출시 버전에서 발생한 버그를 수정 하는 브랜치   
 
 # Team Info
-(깃허브 프로필을 추가 예정)
+<table>
+<tbody>
+<tr>
+<td align="center"><img src="[https://avatars2.githubusercontent.com/u/(userid)?v=4?s=100](https://avatars2.githubusercontent.com/u/Dev-JihyeMoon?v=4?s=100)" width="100px;" alt="Insert Users Name"/><br /><sub><b>Insert Users Name</b></sub></td>
+</tr>
+</tbody>
+</table>
