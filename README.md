@@ -13,7 +13,7 @@ hotfix : 출시 버전에서 발생한 버그를 수정 하는 브랜치
 <table>
 <tbody>
 <tr>
-<td align="center"><img src="[https://avatars2.githubusercontent.com/u/jihyer0395@gmail.com?v=4?s=100]" width="100px;" alt="Dev-JihyeMoon"/><br /><sub><b>Moon Jihye</b></sub></td>
+<td align="center"><img src="[https://avatars2.githubusercontent.com/u/(userid)?v=4?s=100](https://avatars2.githubusercontent.com/u/(userid)?v=4?s=100)" width="100px;" alt="Insert Users Name"/><br /><sub><b>Insert Users Name</b></sub></td>
 </tr>
 </tbody>
 </table>
