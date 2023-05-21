@@ -29,12 +29,10 @@ public class TeamDAOImpl implements TeamDAO {
     }
 
     @Override
-    public Team updateTeamName(Long id, String name) throws Exception {
-        Optional<Team> selectedTeam = teamRepository.findById(id);
+    public Team updateTeamName(Team team) throws Exception {
+        Optional<Team> selectedTeam = teamRepository.findById(team.getId());
         Team updatedTeam;
         if(selectedTeam.isPresent()) {
-            Team team = selectedTeam.get();
-            team.setName(name);
             updatedTeam = teamRepository.save(team);
         } else {
             throw new Exception();

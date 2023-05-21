@@ -1,8 +1,8 @@
 package com.example.challenger.controller;
 
-import com.example.challenger.data.dto.TeamMemberDTO;
-import com.example.challenger.data.dto.TeamMemberResponseDTO;
-import com.example.challenger.data.dto.UpdateTeamMemberNameDTO;
+import com.example.challenger.data.dto.TeamMemberDto;
+import com.example.challenger.data.dto.TeamMemberResponseDto;
+import com.example.challenger.data.dto.UpdateTeamMemberNameDto;
 import com.example.challenger.service.TeamMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,17 +23,17 @@ public class TeamMemberController {
 
     //    멤버 정보 조회 by Id
     @GetMapping("v1/info")
-    public TeamMemberResponseDTO getMemberInfo(Long id) {
-        TeamMemberResponseDTO teamMemberResponseDTO = teamMemberService.getMemberInfo(id);
-        return teamMemberResponseDTO;
+    public TeamMemberResponseDto getMemberInfo(Long id) {
+        TeamMemberResponseDto teamMemberResponseDto = teamMemberService.getMemberInfo(id);
+        return teamMemberResponseDto;
     }
 
     //    팀 멤버 추가
     @PostMapping("v1/add")
     @Transactional
-    public ResponseEntity<TeamMemberResponseDTO> addTeam(@RequestBody TeamMemberDTO teamMemberDTO) {
-        TeamMemberResponseDTO teamMemberResponseDTO = teamMemberService.saveTeamMember(teamMemberDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(teamMemberResponseDTO);
+    public ResponseEntity<TeamMemberResponseDto> addTeam(@RequestBody TeamMemberDto teamMemberDto) {
+        TeamMemberResponseDto teamMemberResponseDto = teamMemberService.saveTeamMember(teamMemberDto);
+        return ResponseEntity.status(HttpStatus.OK).body(teamMemberResponseDto);
     }
 
     //    멤버 삭제 by Id
@@ -46,8 +46,8 @@ public class TeamMemberController {
 
     //    멤버 이름 변경
     @PutMapping("v1/update")
-    public ResponseEntity<TeamMemberResponseDTO> updateTeamMemberName(@RequestBody UpdateTeamMemberNameDTO updateTeamMemberNameDTO) throws Exception {
-        TeamMemberResponseDTO teamMemberResponseDTO = teamMemberService.updateTeamMemberName(updateTeamMemberNameDTO.getId(), updateTeamMemberNameDTO.getName());
-        return ResponseEntity.status(HttpStatus.OK).body(teamMemberResponseDTO);
+    public ResponseEntity<TeamMemberResponseDto> updateTeamMemberName(@RequestBody UpdateTeamMemberNameDto updateTeamMemberNameDto) throws Exception {
+        TeamMemberResponseDto teamMemberResponseDto = teamMemberService.updateTeamMemberName(updateTeamMemberNameDto.getId(), updateTeamMemberNameDto.getName());
+        return ResponseEntity.status(HttpStatus.OK).body(teamMemberResponseDto);
     }
 }

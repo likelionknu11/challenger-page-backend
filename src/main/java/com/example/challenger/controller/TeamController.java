@@ -20,31 +20,31 @@ public class TeamController {
     }
 
     @GetMapping("v1/get")
-    public ResponseEntity<TeamResponseDTO> getTeamInfo(Long id){
-        TeamResponseDTO teamResponseDTO = teamService.getTeamNameById(id);
+    public ResponseEntity<TeamResponseDto> getTeamInfo(Long id){
+        TeamResponseDto teamResponseDto = teamService.getTeamNameById(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body(teamResponseDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(teamResponseDto);
     }
 
     @GetMapping("v1/get/member")
-    public ResponseEntity<List<GetAllTeamMemberResponseDTO>> getAllTeamMembers(Long id) {
-        List<GetAllTeamMemberResponseDTO> getAllTeamMemberResponseDTO = teamService.getAllTeamMember(id);
+    public ResponseEntity<List<GetAllTeamMemberResponseDto>> getAllTeamMembers(Long id) {
+        List<GetAllTeamMemberResponseDto> getAllTeamMemberResponseDto = teamService.getAllTeamMember(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body(getAllTeamMemberResponseDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(getAllTeamMemberResponseDto);
     }
 
     @PostMapping("v1/create")
-    public ResponseEntity<TeamResponseDTO> createTeam(@RequestBody TeamDTO teamDTO) {
-        TeamResponseDTO teamResponseDTO = teamService.saveTeam(teamDTO);
+    public ResponseEntity<TeamResponseDto> createTeam(@RequestBody TeamDto teamDto) {
+        TeamResponseDto teamResponseDto = teamService.saveTeam(teamDto);
 
-        return ResponseEntity.status(HttpStatus.OK).body(teamResponseDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(teamResponseDto);
     }
 
     @PutMapping("v1/update")
-    public ResponseEntity<TeamResponseDTO> updateTeamName(@RequestBody UpdateTeamNameDTO updateTeamNameDTO) throws Exception {
-        TeamResponseDTO teamResponseDTO = teamService.updateTeamName(updateTeamNameDTO.getId(), updateTeamNameDTO.getName());
+    public ResponseEntity<TeamResponseDto> updateTeamName(@RequestBody TeamDto teamDto) throws Exception {
+        TeamResponseDto teamResponseDto = teamService.updateTeamName(teamDto);
 
-        return ResponseEntity.status(HttpStatus.OK).body(teamResponseDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(teamResponseDto);
     }
 
     @DeleteMapping("v1/delete")

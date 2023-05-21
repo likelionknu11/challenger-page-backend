@@ -4,9 +4,9 @@ import com.example.challenger.data.dao.TeamDAO;
 import com.example.challenger.data.dao.TeamMemberDAO;
 import com.example.challenger.data.domain.Member;
 import com.example.challenger.data.domain.Team;
-import com.example.challenger.data.dto.GetAllTeamMemberResponseDTO;
-import com.example.challenger.data.dto.TeamDTO;
-import com.example.challenger.data.dto.TeamResponseDTO;
+import com.example.challenger.data.dto.GetAllTeamMemberResponseDto;
+import com.example.challenger.data.dto.TeamDto;
+import com.example.challenger.data.dto.TeamResponseDto;
 import com.example.challenger.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,56 +27,45 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public TeamResponseDTO getTeamNameById(Long id) {
+    public TeamResponseDto getTeamNameById(Long id) {
         Optional<Team> team = teamDAO.selectTeam(id);
-        TeamResponseDTO teamResponseDTO = new TeamResponseDTO();
-        teamResponseDTO.setId(team.get().getId());
-        teamResponseDTO.setName(team.get().getName());
-        return teamResponseDTO;
+        TeamResponseDto teamResponseDto = new TeamResponseDto();
+        return teamResponseDto.toDto(team.get());
     }
 
     @Override
-    public List<GetAllTeamMemberResponseDTO> getAllTeamMember(Long id) {
+    public List<GetAllTeamMemberResponseDto> getAllTeamMember(Long id) {
         List<Member> members = teamMemberDAO.selectAllTeamMember(id);
-        List<GetAllTeamMemberResponseDTO> getAllTeamMemberDTOList = new ArrayList<>();
+        List<GetAllTeamMemberResponseDto> getAllTeamMemberDtoList = new ArrayList<>();
 
         for(Member member : members) {
-            GetAllTeamMemberResponseDTO getAllTeamMemberResponseDTO = new GetAllTeamMemberResponseDTO();
-            getAllTeamMemberResponseDTO.setId(member.getId());
-            getAllTeamMemberResponseDTO.setName(member.getName());
-            getAllTeamMemberResponseDTO.setPosition(member.getPosition());
-            getAllTeamMemberDTOList.add(getAllTeamMemberResponseDTO);
+            GetAllTeamMemberResponseDto getAllTeamMemberResponseDto = new GetAllTeamMemberResponseDto();
+            getAllTeamMemberResponseDto.setId(member.getId());
+            getAllTeamMemberResponseDto.setName(member.getName());
+            getAllTeamMemberResponseDto.setPosition(member.getPosition());
+            getAllTeamMemberDtoList.add(getAllTeamMemberResponseDto);
         }
 
-        return getAllTeamMemberDTOList;
+        return getAllTeamMemberDtoList;
     }
 
     @Override
-    public TeamResponseDTO saveTeam(TeamDTO teamDTO) {
-        Team team = new Team();
-        team.setName(teamDTO.getName());
-
-        Team savedTeam = teamDAO.insertTeam(team);
-        TeamResponseDTO teamResponseDTO = new TeamResponseDTO();
-        teamResponseDTO.setId(savedTeam.getId());
-        teamResponseDTO.setName(savedTeam.getName());
-
-        return teamResponseDTO;
+    public TeamResponseDto saveTeam(TeamDto teamDto) {
+        Team savedTeam = teamDAO.insertTeam(teamDto.savingToEntity());
+        TeamResponseDto teamResponseDto = new TeamResponseDto();
+        return teamResponseDto.toDto(savedTeam);
     }
 
     @Override
-    public TeamResponseDTO updateTeamName(Long id, String name) throws Exception{
-        Team updatedTeamName = teamDAO.updateTeamName(id, name);
-
-        TeamResponseDTO teamResponseDTO = new TeamResponseDTO();
-        teamResponseDTO.setId(updatedTeamName.getId());
-        teamResponseDTO.setName(updatedTeamName.getName());
-
-        return teamResponseDTO;
+    public TeamResponseDto updateTeamName(TeamDto teamDto) throws Exception {
+        Team updatedTeamName = teamDAO.updateTeamName(teamDto.updateToEntity());
+        TeamResponseDto teamResponseDto = new TeamResponseDto();
+        return teamResponseDto.toDto(updatedTeamName);
     }
 
     @Override
     public void deleteTeam(Long id) throws Exception {
         teamDAO.deleteTeam(id);
     }
+
 }

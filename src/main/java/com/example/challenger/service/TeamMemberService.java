@@ -1,14 +1,11 @@
 package com.example.challenger.service;
 
-import com.example.challenger.data.dto.TeamMemberDTO;
-import com.example.challenger.data.dto.TeamMemberResponseDTO;
-
-import java.util.List;
-import java.util.Optional;
+import com.example.challenger.data.dto.TeamMemberDto;
+import com.example.challenger.data.dto.TeamMemberResponseDto;
 
 public interface TeamMemberService {
-    TeamMemberResponseDTO saveTeamMember(TeamMemberDTO teamMemberDTO);
-    TeamMemberResponseDTO getMemberInfo(Long id);
-    TeamMemberResponseDTO updateTeamMemberName(Long id, String name) throws Exception;
+    TeamMemberResponseDto saveTeamMember(TeamMemberDto teamMemberDto);
+    TeamMemberResponseDto getMemberInfo(Long id);
+    TeamMemberResponseDto updateTeamMemberName(Long id, String name) throws Exception;
     void deleteTeamMember(Long id) throws Exception;
 }

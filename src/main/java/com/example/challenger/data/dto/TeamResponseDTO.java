@@ -1,17 +1,21 @@
 package com.example.challenger.data.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.example.challenger.data.domain.Team;
+import lombok.*;
 
-@Getter
-@Setter
-public class TeamResponseDTO {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class TeamResponseDto {
     private Long id;
     private String name;
 
-    public TeamResponseDTO() {}
-    public TeamResponseDTO(Long id, String name) {
-        this.id = id;
-        this.name = name;
+    public TeamResponseDto toDto(Team entity){
+       return TeamResponseDto.builder()
+               .id(entity.getId())
+               .name(entity.getName())
+               .build();
     }
+
 }

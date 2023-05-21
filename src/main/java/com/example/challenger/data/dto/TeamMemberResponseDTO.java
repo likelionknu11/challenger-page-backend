@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Builder
-public class TeamMemberResponseDTO {
+public class TeamMemberResponseDto {
     private Long id;
     private String name;
     private String position;

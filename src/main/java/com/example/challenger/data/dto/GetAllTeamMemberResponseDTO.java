@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Builder
-public class GetAllTeamMemberResponseDTO {
+public class GetAllTeamMemberResponseDto {
     private Long id;
     private String name;
     private String position;
