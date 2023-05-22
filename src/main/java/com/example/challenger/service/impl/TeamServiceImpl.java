@@ -4,8 +4,8 @@ import com.example.challenger.data.dao.TeamDAO;
 import com.example.challenger.data.dao.TeamMemberDAO;
 import com.example.challenger.data.domain.Member;
 import com.example.challenger.data.domain.Team;
-import com.example.challenger.data.dto.GetAllTeamMemberResponseDto;
 import com.example.challenger.data.dto.TeamDto;
+import com.example.challenger.data.dto.TeamMemberResponseDto;
 import com.example.challenger.data.dto.TeamResponseDto;
 import com.example.challenger.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +34,13 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public List<GetAllTeamMemberResponseDto> getAllTeamMember(Long id) {
+    public List<TeamMemberResponseDto> getAllTeamMember(Long id) {
         List<Member> members = teamMemberDAO.selectAllTeamMember(id);
-        List<GetAllTeamMemberResponseDto> getAllTeamMemberDtoList = new ArrayList<>();
+        List<TeamMemberResponseDto> getAllTeamMemberDtoList = new ArrayList<>();
 
-        for(Member member : members) {
-            GetAllTeamMemberResponseDto getAllTeamMemberResponseDto = new GetAllTeamMemberResponseDto();
-            getAllTeamMemberResponseDto.setId(member.getId());
-            getAllTeamMemberResponseDto.setName(member.getName());
-            getAllTeamMemberResponseDto.setPosition(member.getPosition());
-            getAllTeamMemberDtoList.add(getAllTeamMemberResponseDto);
+        for (Member member : members) {
+            TeamMemberResponseDto teamMemberResponseDto = new TeamMemberResponseDto();
+            getAllTeamMemberDtoList.add(teamMemberResponseDto.listToDto(member));
         }
 
         return getAllTeamMemberDtoList;

@@ -34,22 +34,17 @@ public class TeamMemberDAOImpl implements TeamMemberDAO {
     }
 
     @Override
-    public Member updateTeamMemberName(Long id, String name) throws Exception {
-        Optional<Member> selectedMember = teamMemberRepository.findById(id);
+    public Member updateTeamMemberName(Member member) throws Exception {
+        Optional<Member> selectedMember = teamMemberRepository.findById(member.getId());
         Team team = teamRepository.getById(selectedMember.get().getTeam().getId());
         Member updatedTeamMember;
         if(selectedMember.isPresent()) {
-            Member member = selectedMember.get();
             member.setId(selectedMember.get().getId());
-            member.setName(name);
+            member.setName(member.getName());
             member.setPosition(selectedMember.get().getPosition());
             member.setTeam(team);
 
             updatedTeamMember = teamMemberRepository.save(member);
-            updatedTeamMember.setId(updatedTeamMember.getId());
-            updatedTeamMember.setName(updatedTeamMember.getName());
-            updatedTeamMember.setPosition(updatedTeamMember.getPosition());
-            updatedTeamMember.setTeam(updatedTeamMember.getTeam());
         } else {
             throw new Exception();
         }

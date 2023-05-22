@@ -2,7 +2,6 @@ package com.example.challenger.controller;
 
 import com.example.challenger.data.dto.TeamMemberDto;
 import com.example.challenger.data.dto.TeamMemberResponseDto;
-import com.example.challenger.data.dto.UpdateTeamMemberNameDto;
 import com.example.challenger.service.TeamMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,8 +45,8 @@ public class TeamMemberController {
 
     //    멤버 이름 변경
     @PutMapping("v1/update")
-    public ResponseEntity<TeamMemberResponseDto> updateTeamMemberName(@RequestBody UpdateTeamMemberNameDto updateTeamMemberNameDto) throws Exception {
-        TeamMemberResponseDto teamMemberResponseDto = teamMemberService.updateTeamMemberName(updateTeamMemberNameDto.getId(), updateTeamMemberNameDto.getName());
+    public ResponseEntity<TeamMemberResponseDto> updateTeamMemberName(@RequestBody TeamMemberDto teamMemberDto) throws Exception {
+        TeamMemberResponseDto teamMemberResponseDto = teamMemberService.updateTeamMemberName(teamMemberDto);
         return ResponseEntity.status(HttpStatus.OK).body(teamMemberResponseDto);
     }
 }

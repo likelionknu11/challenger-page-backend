@@ -7,9 +7,11 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
-
+@Data
+@NoArgsConstructor(force = true)
+@AllArgsConstructor
 @Table(name="member")
+@Builder
 public class Member {
     //Id column
     @Id

@@ -1,5 +1,6 @@
 package com.example.challenger.data.dto;
 
+import com.example.challenger.data.domain.Member;
 import com.example.challenger.data.domain.Team;
 import lombok.*;
 

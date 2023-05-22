@@ -27,10 +27,10 @@ public class TeamController {
     }
 
     @GetMapping("v1/get/member")
-    public ResponseEntity<List<GetAllTeamMemberResponseDto>> getAllTeamMembers(Long id) {
-        List<GetAllTeamMemberResponseDto> getAllTeamMemberResponseDto = teamService.getAllTeamMember(id);
+    public ResponseEntity<List<TeamMemberResponseDto>> getAllTeamMembers(Long id) {
+        List<TeamMemberResponseDto> teamMemberResponseDto = teamService.getAllTeamMember(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body(getAllTeamMemberResponseDto);
+        return ResponseEntity.status(HttpStatus.OK).body(teamMemberResponseDto);
     }
 
     @PostMapping("v1/create")

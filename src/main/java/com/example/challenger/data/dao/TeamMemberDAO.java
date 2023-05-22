@@ -9,6 +9,6 @@ public interface TeamMemberDAO {
     Member addMember(Member member);
     Optional<Member> getMemberInfo(Long id);
     List<Member> selectAllTeamMember(Long id);
-    Member updateTeamMemberName(Long id, String name) throws Exception;
+    Member updateTeamMemberName(Member member) throws Exception;
     void deleteMember(Long id) throws Exception;
 }
