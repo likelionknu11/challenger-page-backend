@@ -6,7 +6,6 @@ import com.example.challenger.data.domain.Member;
 import com.example.challenger.data.domain.Team;
 import com.example.challenger.data.dto.TeamMemberDto;
 import com.example.challenger.data.dto.TeamMemberResponseDto;
-import com.example.challenger.data.dto.TeamResponseDto;
 import com.example.challenger.data.repository.TeamRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
