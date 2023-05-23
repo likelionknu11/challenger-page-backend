@@ -28,7 +28,7 @@ public class Member {
     @NotNull
     private String position;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name="team_id")
     @NotNull
     private Team team;
