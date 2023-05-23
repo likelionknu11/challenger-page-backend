@@ -7,14 +7,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class TeamMemberDto {
     private Long id;
     private String name;
     private String position;
     private Team team;
     private Long teamId;
-
-
 
     public Member toEntity() {
         return Member.builder()
