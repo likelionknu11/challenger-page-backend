@@ -1,8 +1,8 @@
 package com.example.challenger.controller;
 
-import com.example.challenger.data.dto.ProjectStatus.ResponseDto;
-import com.example.challenger.data.dto.ProjectStatus.RequestDto;
-import com.example.challenger.data.dto.ProjectStatus.UpdateDto;
+import com.example.challenger.data.dto.ProjectStatusDto.ResponseDto;
+import com.example.challenger.data.dto.ProjectStatusDto.RequestDto;
+import com.example.challenger.data.dto.ProjectStatusDto.UpdateDto;
 
 import com.example.challenger.service.ProjectStatusService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -42,30 +42,19 @@ public class PostDAOImpl implements PostDAO {
 
     // Post 업데이트
     @Override
-    public Post updatePost(Long id, String projectName, String githubPath,
-                           String content, String imagePath) throws Exception {
-        Post selectedPost = postRepository.getById(id);
-        //Team team = teamRepository.getById(selectedPost.getTeam().getId());
-        //ProjectStatus statusID = projectStatusRepository.getById(selectedPost.getId());
+    public Post updatePost(Post updatePost) throws Exception {
+        Optional<Post> selectedPost = postRepository.findById(updatePost.getId());
 
         Post updatedPost;
-        if(selectedPost != null) {
-            Post post = selectedPost;
+        if(selectedPost.isPresent()) {
+            Post post = selectedPost.get();
 
-            post.setProjectName(projectName);
-            post.setGithubPath(githubPath);
-            post.setContent(content);
-            post.setImagePath(imagePath);
-
+            post.setProjectName(updatePost.getProjectName());
+            post.setGithubPath(updatePost.getGithubPath());
+            post.setContent(updatePost.getContent());
+            post.setImagePath(updatePost.getImagePath());
 
             updatedPost = postRepository.save(post);
-            /*updatedPost.setId(updatedPost.getId());
-            updatedPost.setProjectName(updatedPost.getProjectName());
-            updatedPost.setGithubPath(updatedPost.getGithubPath());
-            updatedPost.setContent(updatedPost.getContent());
-            updatedPost.setImagePath(updatedPost.getImagePath());
-            updatedPost.setTeam(updatedPost.getTeam());
-            updatedPost.setStatusValue(updatedPost.getStatusValue());*/
         } else {
             throw new Exception();
         }

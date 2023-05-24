@@ -4,6 +4,7 @@ package com.example.challenger.data.domain;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -23,7 +24,8 @@ public class ProjectStatus {
     @NotNull
     private String status;
 
-//    //Slave
-//    @OneToOne(mappedBy = "statusValue")
-//    private Post post;
+    //Slave
+    @OneToOne(mappedBy = "statusValue")
+    @ToString.Exclude
+    private Post post;
 }
