@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @SpringBootTest
 class TeamServiceTest {
     @Autowired
@@ -17,6 +19,20 @@ class TeamServiceTest {
 
     @Autowired
     TeamDAO teamDAO;
+
+    @Test
+    @DisplayName("Builder 테스트")
+    void testBuilder() {
+        Long id = 1L;
+        String name = "팀이름";
+        TeamDto teamDto = TeamDto.builder()
+                .id(id)
+                .name(name)
+                .build();
+
+        assertThat(teamDto.getId()).isEqualTo(id);
+        assertThat(teamDto.getName()).isEqualTo(name);
+    }
 
     @Test
     @DisplayName("새로운 팀 추가")
