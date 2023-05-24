@@ -1,8 +1,9 @@
 package com.example.challenger.controller;
 
-import com.example.challenger.data.dto.PostDto;
-import com.example.challenger.data.dto.PostResponseDto;
-import com.example.challenger.data.dto.UpdatePostDto;
+import com.example.challenger.data.dto.PostDto.Response;
+import com.example.challenger.data.dto.PostDto.Request;
+import com.example.challenger.data.dto.PostDto.Update;
+
 import com.example.challenger.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,26 +23,23 @@ public class PostController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<PostResponseDto> getPost(Long id) {
-        PostResponseDto postResponseDto = postService.getPost(id);
+    public ResponseEntity<Response> getPost(Long id) {
+        Response postResponseDto = postService.getPost(id);
         return ResponseEntity.status(HttpStatus.OK).body(postResponseDto);
     }
 
     @PostMapping("/post")
     @Transactional
-    public ResponseEntity<PostResponseDto> createPost(@RequestBody PostDto postDto) {
-        PostResponseDto postResponseDto = postService.savePost(postDto);
+    public ResponseEntity<Response> createPost(@RequestBody Request postDto) {
+        Response postResponseDto = postService.savePost(postDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(postResponseDto);
     }
 
     @PutMapping("/put")
-    public ResponseEntity<PostResponseDto>updatePost(
-            @RequestBody UpdatePostDto updatePostDto) throws Exception{
-        PostResponseDto postResponseDto = postService.updatePost(
-                updatePostDto.getId(), updatePostDto.getProjectName(),
-                updatePostDto.getGithubPath(), updatePostDto.getContent(),
-                updatePostDto.getImagePath());
+    public ResponseEntity<Response>updatePost(
+            @RequestBody Update updatePostDto) throws Exception{
+        Response postResponseDto = postService.updatePost(updatePostDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(postResponseDto);
     }

@@ -2,7 +2,7 @@ package com.example.challenger.data.dto;
 
 import lombok.*;
 
-public class ProjectStatus {
+public class ProjectStatusDto {
 
     //(기존) ProjectStatusDTO
     @Getter

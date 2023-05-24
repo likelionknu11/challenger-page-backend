@@ -4,8 +4,11 @@ import com.example.challenger.data.dao.PostDAO;
 import com.example.challenger.data.domain.Post;
 import com.example.challenger.data.domain.ProjectStatus;
 import com.example.challenger.data.domain.Team;
-import com.example.challenger.data.dto.PostDto;
-import com.example.challenger.data.dto.PostResponseDto;
+
+import com.example.challenger.data.dto.PostDto.Response;
+import com.example.challenger.data.dto.PostDto.Request;
+import com.example.challenger.data.dto.PostDto.Update;
+
 import com.example.challenger.data.repository.ProjectStatusRepository;
 import com.example.challenger.data.repository.TeamRepository;
 import com.example.challenger.service.PostService;
@@ -30,33 +33,35 @@ public class PostServiceImpl implements PostService {
     //조회
     @Override
     @Transactional
-    public PostResponseDto getPost(Long id) {
+    public Response getPost(Long id) {
         Post post = postDAO.selectPost(id);
 
-        PostResponseDto postResponseDto = new PostResponseDto();
-        postResponseDto.setId(post.getId());
-
-        postResponseDto.setProjectName(post.getProjectName());
-        postResponseDto.setGithubPath(post.getGithubPath());
-        postResponseDto.setContent(post.getContent());
-        postResponseDto.setImagePath(post.getImagePath());
-        postResponseDto.setTeamId(post.getTeam().getId());
-        postResponseDto.setTeamName(post.getTeam().getName());
-        postResponseDto.setStatusId(post.getStatusValue().getId());
-        postResponseDto.setStatusValue(post.getStatusValue().getStatus());
+        Response postResponseDto = Response.builder()
+                .id(post.getId())
+                .projectName(post.getProjectName())
+                .githubPath(post.getGithubPath())
+                .content(post.getContent())
+                .imagePath(post.getImagePath())
+                .teamId(post.getTeam().getId())
+                .teamName(post.getTeam().getName())
+                .statusId(post.getStatusValue().getId())
+                .statusValue(post.getStatusValue().getStatus())
+                .build();
 
         return postResponseDto;
     }
 
     //저장
     @Override
-    public PostResponseDto savePost(PostDto postDto) {
+    public Response savePost(Request postDto) {
         System.out.println("postDto.getStatusId(): " + postDto.getStatusId());
 
+        //먼저, 노예인 Team과 ProjectStatus 가져오기
         ProjectStatus statusID = projectStatusRepository.getById(postDto.getStatusId());
         Team TeamID = teamRepository.getById(postDto.getTeamId());
         System.out.println("statusID : " + TeamID);
 
+        //그 다음, 주인 Post 객체 생성
         Post post = new Post();
         post.setProjectName(postDto.getProjectName());
         post.setGithubPath(postDto.getGithubPath());
@@ -71,16 +76,17 @@ public class PostServiceImpl implements PostService {
         System.out.println("getStatusId : " + savedPostStatus.getStatusValue().getId());
         System.out.println("getStatus : " + savedPostStatus.getStatusValue().getStatus());
 
-        PostResponseDto postResponseDto = new PostResponseDto();
-        postResponseDto.setId(savedPostStatus.getId());
-        postResponseDto.setProjectName(savedPostStatus.getProjectName());
-        postResponseDto.setGithubPath(savedPostStatus.getGithubPath());
-        postResponseDto.setContent(savedPostStatus.getContent());
-        postResponseDto.setImagePath(savedPostStatus.getImagePath());
-        postResponseDto.setTeamId(savedPostStatus.getTeam().getId());
-        postResponseDto.setTeamName(savedPostStatus.getTeam().getName());
-        postResponseDto.setStatusId(savedPostStatus.getStatusValue().getId());
-        postResponseDto.setStatusValue(savedPostStatus.getStatusValue().getStatus());
+        Response postResponseDto = Response.builder()
+                .id(savedPostStatus.getId())
+                .projectName(savedPostStatus.getProjectName())
+                .githubPath(savedPostStatus.getGithubPath())
+                .content(savedPostStatus.getContent())
+                .imagePath(savedPostStatus.getImagePath())
+                .teamId(savedPostStatus.getTeam().getId())
+                .teamName(savedPostStatus.getTeam().getName())
+                .statusId(savedPostStatus.getStatusValue().getId())
+                .statusValue(savedPostStatus.getStatusValue().getStatus())
+                .build();
 
         return postResponseDto;
     }
@@ -88,19 +94,27 @@ public class PostServiceImpl implements PostService {
     //업데이트
     @Override
     @Transactional
-    public PostResponseDto updatePost(Long id, String projectName, String githubPath,
-                                      String content, String imagePath) throws Exception {
-        Post changedPost = postDAO.updatePost(id, projectName, githubPath, content, imagePath);
+    public Response updatePost(Update updatePostDto) throws Exception {
+        Post post = new Post();
+        post.setId(updatePostDto.getId());
+        post.setProjectName(updatePostDto.getProjectName());
+        post.setGithubPath(updatePostDto.getGithubPath());
+        post.setContent(updatePostDto.getContent());
+        post.setImagePath(updatePostDto.getImagePath());
 
-        PostResponseDto postResponseDto = new PostResponseDto();
-        postResponseDto.setId(changedPost.getId());
-        postResponseDto.setProjectName(changedPost.getProjectName());
-        postResponseDto.setGithubPath(changedPost.getGithubPath());
-        postResponseDto.setContent(changedPost.getContent());
-        postResponseDto.setImagePath(changedPost.getImagePath());
-        postResponseDto.setTeamId(changedPost.getTeam().getId());
-        postResponseDto.setStatusId(changedPost.getStatusValue().getId());
+        Post changedPost = postDAO.updatePost(post);
 
+        Response postResponseDto = Response.builder()
+                .id(changedPost.getId())
+                .projectName(changedPost.getProjectName())
+                .githubPath(changedPost.getGithubPath())
+                .content(changedPost.getContent())
+                .imagePath(changedPost.getImagePath())
+                .teamId(changedPost.getTeam().getId())
+                .teamName(changedPost.getTeam().getName())
+                .statusId(changedPost.getStatusValue().getId())
+                .statusValue(changedPost.getStatusValue().getStatus())
+                .build();
         return postResponseDto;
     }
 
