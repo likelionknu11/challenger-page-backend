@@ -1,13 +1,14 @@
 package com.example.challenger.service;
 
-import com.example.challenger.data.dto.ProjectStatusDto;
-import com.example.challenger.data.dto.ProjectStatusResponseDto;
+import com.example.challenger.data.dto.ProjectStatus.ResponseDto;
+import com.example.challenger.data.dto.ProjectStatus.RequestDto;
+import com.example.challenger.data.dto.ProjectStatus.UpdateDto;
 
 public interface ProjectStatusService {
-    ProjectStatusResponseDto getProjectStatus(Long id);
+    ResponseDto getProjectStatus(Long id);
     // -값으로 정보 찾기
-    ProjectStatusResponseDto getProjectStatus(String status);
-    ProjectStatusResponseDto saveProjectStatus(ProjectStatusDto projectStatusDto);
-    ProjectStatusResponseDto updateProjectStatus(Long id, String status) throws Exception;
+    ResponseDto getProjectStatus(String status);
+    ResponseDto saveProjectStatus(RequestDto projectStatusDto);
+    ResponseDto updateProjectStatus(UpdateDto updateProjectStatusDto) throws Exception;
     void deleteProjectStatus(Long id) throws Exception;
 }
