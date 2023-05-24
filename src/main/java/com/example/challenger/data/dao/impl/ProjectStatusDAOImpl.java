@@ -6,6 +6,7 @@ import com.example.challenger.data.repository.ProjectStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
 import java.util.Optional;
 
 @Component
@@ -42,20 +43,20 @@ public class ProjectStatusDAOImpl implements ProjectStatusDAO {
 
     // ProjectStatus 업데이트
     @Override
-    public ProjectStatus updateProjectStatus(Long id, String status) throws Exception {
-        Optional<ProjectStatus> selectedProjectStatus = projectStatusRepository.findById(id);
+    public ProjectStatus updateProjectStatus(ProjectStatus updateProjectStatus) throws Exception {
+        Optional<ProjectStatus> selectedProjectStatus = projectStatusRepository.findById(updateProjectStatus.getId());
 
-        ProjectStatus updatedProjectStauts;
+        ProjectStatus updated_ProjectStauts;
         if(selectedProjectStatus.isPresent()) {
             ProjectStatus projectStatus = selectedProjectStatus.get();
 
-            projectStatus.setStatus(status);
+            projectStatus.setStatus(updateProjectStatus.getStatus());
 
-            updatedProjectStauts = projectStatusRepository.save(projectStatus);
+            updated_ProjectStauts = projectStatusRepository.save(projectStatus);
         } else {
             throw new Exception();
         }
-        return updatedProjectStauts;
+        return updated_ProjectStauts;
     }
 
     @Override

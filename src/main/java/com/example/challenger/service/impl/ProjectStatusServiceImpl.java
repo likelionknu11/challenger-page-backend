@@ -2,8 +2,11 @@ package com.example.challenger.service.impl;
 
 import com.example.challenger.data.dao.ProjectStatusDAO;
 import com.example.challenger.data.domain.ProjectStatus;
-import com.example.challenger.data.dto.ProjectStatusDto;
-import com.example.challenger.data.dto.ProjectStatusResponseDto;
+
+import com.example.challenger.data.dto.ProjectStatus.ResponseDto;
+import com.example.challenger.data.dto.ProjectStatus.RequestDto;
+import com.example.challenger.data.dto.ProjectStatus.UpdateDto;
+
 import com.example.challenger.service.ProjectStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +26,13 @@ public class ProjectStatusServiceImpl implements ProjectStatusService {
     //Transactional 어노테이션 넣어서 해결!
     @Override
     @Transactional
-    public ProjectStatusResponseDto getProjectStatus(Long id) {
+    public ResponseDto getProjectStatus(Long id) {
         ProjectStatus projectStatus = projectStatusDAO.selectProjectStatus(id);
 
-        ProjectStatusResponseDto projectStatusResponseDto = new ProjectStatusResponseDto();
-        projectStatusResponseDto.setId(projectStatus.getId());
-        projectStatusResponseDto.setStatus(projectStatus.getStatus());
+        ResponseDto projectStatusResponseDto = ResponseDto.builder()
+                .id(projectStatus.getId())
+                .status(projectStatus.getStatus())
+                .build();
 
         return projectStatusResponseDto;
     }
@@ -36,39 +40,46 @@ public class ProjectStatusServiceImpl implements ProjectStatusService {
     // status 값으로 정보 찾기.
     @Override
     @Transactional
-    public ProjectStatusResponseDto getProjectStatus(String status) {
+    public ResponseDto getProjectStatus(String status) {
         ProjectStatus projectStatus = projectStatusDAO.selectProjectStatus(status);
 
-        ProjectStatusResponseDto projectStatusResponseDto = new ProjectStatusResponseDto();
-        projectStatusResponseDto.setId(projectStatus.getId());
-        projectStatusResponseDto.setStatus(projectStatus.getStatus());
+        ResponseDto projectStatusResponseDto = ResponseDto.builder()
+                .id(projectStatus.getId())
+                .status(projectStatus.getStatus())
+                .build();
 
         return projectStatusResponseDto;
     }
 
     //저장
     @Override
-    public ProjectStatusResponseDto saveProjectStatus(ProjectStatusDto projectStatusDto) {
+    public ResponseDto saveProjectStatus(RequestDto projectStatusDto) {
         ProjectStatus projectStatus = new ProjectStatus();
         projectStatus.setStatus(projectStatusDto.getStatus());
 
         ProjectStatus savedProjectStatus = projectStatusDAO.insertProjectStatus(projectStatus);
 
-        ProjectStatusResponseDto projectStatusResponseDto = new ProjectStatusResponseDto();
-        projectStatusResponseDto.setId(savedProjectStatus.getId());
-        projectStatusResponseDto.setStatus(savedProjectStatus.getStatus());
+        ResponseDto projectStatusResponseDto = ResponseDto.builder()
+                .id(savedProjectStatus.getId())
+                .status(savedProjectStatus.getStatus())
+                .build();
 
         return projectStatusResponseDto;
     }
 
     //업데이트
     @Override
-    public ProjectStatusResponseDto updateProjectStatus(Long id, String status) throws Exception {
-        ProjectStatus changedProjectStatus = projectStatusDAO.updateProjectStatus(id, status);
+    public ResponseDto updateProjectStatus(UpdateDto updateDto) throws Exception {
+        ProjectStatus projectStatus = new ProjectStatus();
+        projectStatus.setId(updateDto.getId());
+        projectStatus.setStatus(updateDto.getStatus());
 
-        ProjectStatusResponseDto projectStatusResponseDto = new ProjectStatusResponseDto();
-        projectStatusResponseDto.setId(changedProjectStatus.getId());
-        projectStatusResponseDto.setStatus(changedProjectStatus.getStatus());
+        ProjectStatus changedProjectStatus = projectStatusDAO.updateProjectStatus(projectStatus);
+
+        ResponseDto projectStatusResponseDto = ResponseDto.builder()
+                .id(changedProjectStatus.getId())
+                .status(changedProjectStatus.getStatus())
+                .build();
 
         return projectStatusResponseDto;
     }
