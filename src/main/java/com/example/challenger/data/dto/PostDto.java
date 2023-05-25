@@ -1,6 +1,5 @@
 package com.example.challenger.data.dto;
 
-import com.example.challenger.data.domain.Post;
 import lombok.*;
 
 public class PostDto {
