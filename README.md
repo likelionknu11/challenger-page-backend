@@ -14,7 +14,6 @@ hotfix : 출시 버전에서 발생한 버그를 수정 하는 브랜치
 	<table>
 		<tbody>
 			<tr>
-				<td align="center"><a href="https://github.com/Dev-JihyeMoon"><img src="https://avatars2.githubusercontent.com/u/67064571?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jihye Moon</b></sub><br /></a></td>
 				<td align="center"><a href="https://github.com/zkdl2727"><img src="https://avatars2.githubusercontent.com/u/99383331?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Seong-Su Kim</b></sub><br /></a></td>
 				<td align="center"><a href="https://github.com/eun6"><img src="https://avatars2.githubusercontent.com/u/86345507?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Yeeun Yuk</b></sub><br /></a></td>
    				<td align="center"><a href="https://github.com/yunh03"><img src="https://avatars2.githubusercontent.com/u/57185499?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Yun-Hwan Jeon</b></sub><br /></a></td>
